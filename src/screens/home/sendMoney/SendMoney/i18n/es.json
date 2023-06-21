@@ -1,0 +1,30 @@
+{
+  "addressee": {
+    "sendMoney": "Enviar dinero",
+    "myAccount": "Mi cuenta",
+    "addressee": "Destinatario",
+    "addNew": "Agregar nuevo",
+    "recent": "Recientes",
+    "seeAll": "Ver todos",
+    "bill": "Cuenta"
+  },
+  "amount": {
+    "change": "Cambiar",
+    "amount": "Importe a enviar",
+    "incorrectAmount": "El importe no puede ser mayor al balance"
+  },
+  "concept": {
+    "concept": "Concepto de pago",
+    "optional": "(Opcional)"
+  },
+  "nipModal": {
+    "enterNip": "Ingresa tu NIP",
+    "generateCode": "para generar tu código",
+    "forgotNip": "¿Olvidaste tu NIP?"
+  },
+  "sendMoneyAlert": {
+    "successful": "Transferencia Exitosa",
+    "someWrong": "Algo salió mal",
+    "someWrongMsg": "No pudimos hacer la transacción"
+  }
+}

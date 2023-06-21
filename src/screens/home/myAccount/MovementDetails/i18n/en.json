@@ -1,0 +1,12 @@
+{
+  "movementDetails": {    
+    "movementDetails": "Movement detail",
+    "type": "Type",
+    "amount": "Amount",
+    "date": "Date and Time",
+    "authorization": "Authorization Number",
+    "consult": "Consult CEP",
+    "consultMsg": "This link will be activated no later than 5 minutes after the acceptance of the operation.",
+    "requestClarification": "Request clarification"
+  }
+}

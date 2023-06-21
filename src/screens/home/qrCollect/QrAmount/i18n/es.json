@@ -1,0 +1,12 @@
+{
+    "qrAmount": {    
+      "qrAmount": "Cobrar",
+      "doPayment": "Recibe dinero de usuarios Aurum",
+      "generateCode": "Genera un código:",
+      "enterAmount": "Ingresa el monto",
+      "amountPlaceholder": "$  00",
+      "notice": "No es necesario que este monto sea el valor total a\ngastar. El dinero restante volverá a tu cuenta.",
+      "help": "¿Dónde puedo utilizar mi código?",
+      "btnGenerateCode": "Generar código"
+    }
+  }

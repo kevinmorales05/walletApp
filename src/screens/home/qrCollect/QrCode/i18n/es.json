@@ -1,0 +1,10 @@
+{
+  "qrCode": {
+    "validity": "Vence en ",
+    "codeValue": "Código Aurum con valor de",
+    "help": "Dónde puedo utilizar mi código?",
+    "qrCode": "Código QR",
+    "barCode": "Código de Barras",
+    "qrCollectCode": "Código de cobro"
+  }
+}

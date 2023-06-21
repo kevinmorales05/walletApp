@@ -1,0 +1,12 @@
+{
+  "movementDetails": {    
+    "movementDetails": "Detalle del movimiento",
+    "type": "Tipo",
+    "amount": "Cantidad",
+    "date": "Fecha y hora",
+    "authorization": "Núm. de Autorización",
+    "consult": "Consultar CEP",
+    "consultMsg": "Este vínculo se activará a más tardar dentro de los 5 minutos siguientes a la aceptación de la operación.",
+    "requestClarification": "Solicitar aclaración"
+  }
+}

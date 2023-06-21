@@ -1,0 +1,10 @@
+{
+  "qrCode": {
+    "validity": "Expires in ",
+    "codeValue": "Aurum Code with value of",
+    "help": "Where can I use my code?",
+    "qrCode": "QR Code",
+    "barCode": "Barcode",
+    "qrCollectCode": "Payment code"
+  }
+}

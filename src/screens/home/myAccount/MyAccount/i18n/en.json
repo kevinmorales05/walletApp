@@ -1,0 +1,22 @@
+{
+  "myAccount": {    
+    "myAccount": "My account",
+    "availableBalance": "Available balance",
+    "virtualCard": "Virtual card",
+    "stateCard": "  Active",
+    "seeData": "See data and CVV",
+    "accountInfo": "Account information",
+    "payBalance": "Pay \n balance",
+    "requestCard": "Request physical card",
+    "movements": "Movements",
+    "sendMoney": "Send money",
+    "addressee": "Addressee",
+    "addNew": "Add new",
+    "recent": "Recent",
+    "seeAll": "See all",
+    "bill": "Bill",
+    "moneySent": "Money sent",
+    "moneyReceived": "Money received",
+    "month": "Month"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "language": {
+    "tag": "es"
+  },
+  "home": {
+    "hi": "Hola",
+    "myAccount": "Mi cuenta",
+    "send": "Enviar",
+    "services": "Servicios",
+    "whatNeed": "¿Qué necesitas?",
+    "collect": "Cobrar",
+    "pay": "Pagar"
+  },
+  "myAccount": {
+    "myAurumAccount": "Mi Cuenta Aurum Core",
+    "virtualCard": "Tarjeta Virtual",
+    "seeData": "Ver datos y CVV",
+    "accountInfo": "Información de cuenta",
+    "payBalance": "Abonar saldo",
+    "requestCard": "Solicitar Tarjeta Física",
+    "movements": "Movimientos",
+    "lastDays": "Últimos 30 días"
+  },
+  "drawer": {
+    "profile": "Mi Perfil",
+    "clarifications": "Aclaraciones",
+    "notifications": "Notificaciones",
+    "promotions": "Promociones",
+    "about": "Acerca de Aurum Core",
+    "help": "Ayuda",
+    "logout": "Cerrar sesión",
+    "version": "Aurum Core versión 0.1"
+  },
+  "global": {
+    "goBack": "Volver",
+    "functionNotFoundTitle": "Funcionalidad no disponible",
+    "functionNotFoundText": "Esta funcionalidad se está trabajando.\n Pronto la tendremos disponible.",
+    "next": "Siguiente",
+    "requiredField": "Campo requerido",
+    "cancel": "Cancelar",
+    "validate": "Validar",
+    "search": "Buscar",
+    "add": "Agregar",
+    "enterValidFormat": "Ingresa un formato válido",
+    "continue": "Continuar",
+    "select": "Seleccionar",
+    "accept": "Aceptar",
+    "sorry": "Lo sentimos :(",
+    "functionalityNotAvailable": "Funcionalidad no disponible por el momento."
+  },
+  "welcome": {
+    "welcomeAurumCore": "¡Bienvenido a Aurum Core!",
+    "accountCreated": "Tu cuenta ha sido creada",
+    "clickOnConclude": "Da click en \"Finalizar\" para empezar a utilizar tu nueva aplicacion.",
+    "conclude": "Finalizar",
+    "functionNotFoundText": "Esta funcionalidad se está trabajando.\n Pronto la tendremos disponible."
+  },
+  "languageModal": {
+    "title": "Aurum Core está en {{language}}",
+    "continue": "Continuar en {{language}}",
+    "switch": "Cambiar a {{language}}",
+    "es": "Español",
+    "en": "Ingles"
+  }
+}

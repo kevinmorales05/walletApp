@@ -1,0 +1,11 @@
+{
+  "newAddressee": {
+    "newAddressee": "Nuevo destinatario",
+    "completeInfo": "Completa la información para guardar el contacto.",
+    "account": "No. de cuenta",
+    "beneficiary": "Nombre del beneficiario",
+    "contactAliases": "Alias del contacto",
+    "saveContact": "Guardar contacto",
+    "saveContactMsg": "Este contacto se guardará para futuras operaciones."
+  }
+}

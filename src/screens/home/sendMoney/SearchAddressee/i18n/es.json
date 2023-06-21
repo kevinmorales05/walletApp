@@ -1,0 +1,7 @@
+{
+  "searchAddressee": {
+    "newAddressee": "Nuevo destinatario",
+    "enterData": "Introduce el número de tarjeta, cuenta o la CLABE a buscar",
+    "enterValidNumber": "Ingresa un número válido"
+  }
+}

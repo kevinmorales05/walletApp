@@ -1,0 +1,9 @@
+{
+  "login": {
+    "hi": "¡Hola {{name}}!",
+    "enterPassword": "Ingresa tu contraseña",
+    "welcome": "Bienvenido de nuevo",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "getInto": "Ingresar"
+  }
+}

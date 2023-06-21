@@ -1,0 +1,12 @@
+{
+  "makePayment":{
+    "pay": "Pagar", 
+    "makingPayment": "Estás pagando", 
+    "validity": "Vigencia:",
+    "invoice" : "Folio:", 
+    "verifyInfo" : "Comprueba que los datos estén correctos.",
+    "discountedFrom" : "El dinero será descontado de tu cuenta.",
+    "cancel" : "Cancelar",
+    "addressee": "Destinatario: "
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "language": {
+    "tag": "en"
+  },
+  "home": {
+    "hi": "Hi",
+    "myAccount": "My account",
+    "send": "Send",
+    "services": "Services",
+    "whatNeed": "What do you need?",
+    "collect": "Collect",
+    "pay": "Pay"
+  },
+  "myAccount": {
+    "myAurumAccount": "My Aurum Core account",
+    "virtualCard": "Virtual card",
+    "seeData": "See data and CVV",
+    "accountInfo": "Account info",
+    "payBalance": "Pay balance",
+    "requestCard": "Request Physical Card",
+    "movements": "Movements",
+    "lastDays": "Last 30 days"
+  },
+  "drawer": {
+    "profile": "My Profile",
+    "clarifications": "Clarifications",
+    "notifications": "Notifications",
+    "promotions": "Promotions",
+    "about": "About Aurum Core",
+    "help": "Help",
+    "logout": "Log out",
+    "version": "Aurum Core version 0.1"
+  },
+  "global": {
+    "goBack": "Go back",
+    "functionNotFoundTitle": "Functionality not available",
+    "functionNotFoundText": "This functionality is being worked on.\n We will have it available soon.",
+    "next": "Next",
+    "requiredField": "Required field",
+    "cancel": "Cancel",
+    "validate": "Validate",
+    "search": "Search",
+    "add": "Add",
+    "enterValidFormat": "Please enter a valid format",
+    "continue": "Continue",
+    "select": "Select",
+    "accept": "Accept",
+    "sorry": "We are sorry :(",
+    "functionalityNotAvailable": "Functionality not available at the moment."
+  },
+  "welcome": {
+    "welcomeAurumCore": "Welcome to Aurum Core!",
+    "accountCreated": "Your account has been created",
+    "clickOnConclude": "Click \"Finish\" to start using your new application.",
+    "conclude": "Finish",
+    "functionNotFoundText": "This functionality is being worked on.\n We will have it available soon."
+  },
+  "languageModal": {
+    "title": "Aurum Core is in {{language}}",
+    "continue": "Continue in {{language}}",
+    "switch": "Switch to {{language}}",
+    "es": "Spanish",
+    "en": "English"
+  }
+}

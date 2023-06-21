@@ -1,0 +1,12 @@
+{
+  "makePayment":{
+    "pay": "Pay",
+    "makingPayment": "Making a payment", 
+    "validity": "Validity:",
+    "invoice" : "Invoice:",
+    "verifyInfo" : "Verify the information is correct.",
+    "discountedFrom" : "The money will be discounted from your account.",
+    "cancel" : "Cancel",
+    "addressee": "Addressee:"
+  }
+}

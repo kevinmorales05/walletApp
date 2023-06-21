@@ -1,0 +1,9 @@
+{
+  "loginUser": {
+    "logIn": "Log in",
+    "enterUsername": "Enter your username",
+    "forgotUsername": "Forgot your username?",
+    "notHaveAccount": "You don't have an account?",
+    "createOne": "Create one"
+  }
+}

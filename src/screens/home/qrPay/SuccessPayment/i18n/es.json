@@ -1,0 +1,11 @@
+{
+  "successPayment": {
+    "successfulPay": "Pago exitoso",
+    "moneySentTo" : "Dinero enviado a: ",
+    "account" : "Cuenta Aurum:",
+    "amountSent" : "Monto Pagado",
+    "invoice" : "Folio: ",
+    "trackingKey" : "Clave de Rastreo: ",
+    "finish" : "Salir" 
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "myAccount": {    
+    "myAccount": "Mi cuenta",
+    "availableBalance": "Saldo disponible",
+    "virtualCard": "Tarjeta virtual",
+    "stateCard": "  Activa",
+    "seeData": "Ver datos y CVV",
+    "accountInfo": "Información de cuenta",
+    "payBalance": "Abonar \n saldo",
+    "requestCard": "Solicitar tarjeta física",
+    "movements": "Movimientos",
+    "sendMoney": "Enviar dinero",
+    "addressee": "Destinatario",
+    "addNew": "Agregar nuevo",
+    "recent": "Recientes",
+    "seeAll": "Ver todos",
+    "bill": "Cuenta",
+    "moneySent": "Dinero enviado",
+    "moneyReceived": "Dinero recibido",
+    "month": "Mes"
+  }
+}

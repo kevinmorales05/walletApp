@@ -1,0 +1,11 @@
+{
+  "successPayment": {
+    "successfulPay": "Successful Payment", 
+    "moneySentTo" : "Money sent to: ",
+    "account" : "Aurum Account:",
+    "amountSent" : "Amount Paid",
+    "invoice" : "Invoice: ",
+    "trackingKey" : "Tracking key:",
+    "finish" : "Finish"
+  }
+}

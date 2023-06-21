@@ -1,0 +1,11 @@
+{
+  "home": {
+    "hello": "Hi",
+    "myAccount": "My account",
+    "send": "Send",
+    "services": "Services",
+    "needMsg": "What do you need?",
+    "collect": "Collect",
+    "pay": "Pay"
+  }
+}

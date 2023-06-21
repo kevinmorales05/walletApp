@@ -1,0 +1,11 @@
+{
+  "newAddressee": {
+    "newAddressee": "New Addressee",
+    "completeInfo": "Fill in the information to save the contact.",
+    "account": "Account number",
+    "beneficiary": "Beneficiary Name",
+    "contactAliases": "Contact aliases",
+    "saveContact": "Save contact",
+    "saveContactMsg": "This contact will be saved for future operations."
+  }
+}

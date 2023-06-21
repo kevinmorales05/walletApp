@@ -1,0 +1,7 @@
+{
+  "searchAddressee": {
+    "newAddressee": "New Addressee",
+    "enterData": "Enter the card number, account or CLABE to search",
+    "enterValidNumber": "Please enter a valid number"
+  }
+}

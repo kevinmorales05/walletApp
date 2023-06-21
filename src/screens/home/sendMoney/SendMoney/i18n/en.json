@@ -1,0 +1,30 @@
+{
+  "addressee": {
+    "sendMoney": "Send money",
+    "myAccount": "My account",
+    "addressee": "Addressee",
+    "addNew": "Add new",
+    "recent": "Recent",
+    "seeAll": "See all",
+    "bill": "Bill"
+  },
+  "amount": {
+    "change": "Change",
+    "amount": "Amount to send",
+    "incorrectAmount": "The amount cannot be greater than the balance"
+  },
+  "concept": {
+    "concept": "Payment concept",
+    "optional": "(Optional)"
+  },
+  "nipModal": {
+    "enterNip": "Enter your PIN",
+    "generateCode": "to generate your code",
+    "forgotNip": "Forgot your PIN?"
+  },
+  "sendMoneyAlert": {
+    "successful": "Successful Transfer",
+    "someWrong": "Some Wrong",
+    "someWrongMsg": "We couldn't make the transaction"
+  }
+}
