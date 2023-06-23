@@ -80,11 +80,13 @@ export class ApiToken extends HttpClient {
     return this.classInstance;
   }
 
-  public getToken = () =>
+  public getToken = (userName: string, pwd: string) =>
     this.instance.post('/token', {
       grant_type: 'client_credentials',
       longitude: '41',
       latitude: '40',
+      username: userName,
+      password: pwd,
     });
 
   private handlerError = (err: Error | AxiosError) => {

@@ -39,7 +39,7 @@ const AppNavigator: React.FC = () => {
     dispatch(setInitialStateAppAction());
   }, []);
 
-  if (false) {
+  if (!isLogged) {
     return (
       <Stack.Navigator
         screenOptions={{headerShown: false}}

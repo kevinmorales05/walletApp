@@ -1,40 +1,50 @@
 import {AuthDataInterface} from '../reactRedux';
 import cryptoAES from '../utils/cryptoAES';
-import {
-  IDENTIFIER_BRANCH_DOMAIN,
-  IDENTIFIER_KEY_BRANCH,
-} from '../config';
+//import {IDENTIFIER_BRANCH_DOMAIN, IDENTIFIER_KEY_BRANCH} from '../config';
 import {ApiToken} from '../http/api-token';
 import {ApiAurum} from '../http/api-aurum';
 import {ApiLogin} from '../http/api-login';
 import {HttpClient} from '../http/http-client';
 
+let IDENTIFIER_KEY_BRANCH = 'WsYcyLNk5JFubvXMFPOE6XGnrJIa';
+let IDENTIFIER_BRANCH_DOMAIN = ':@liverpool.com';
+let SECRET: 'l1v3rp00l';
 /**
  * Pre Signup
  * @param user
  * @returns
  */
-let IDENTIFIER_KEY='lJb8nqGOFvAXwwLEm4cgvcA9OyQa'
+let IDENTIFIER_KEY = 'lJb8nqGOFvAXwwLEm4cgvcA9OyQa';
 async function preSignUp(user: AuthDataInterface): Promise<any> {
-  // We instance TOKEN API (https://token.aurumcore.com) and then we get token
-  const tokenResponse = await ApiToken.getInstance().getToken();
+  let pass_encript = cryptoAES(user.password, SECRET);
 
-  if (tokenResponse === undefined)
-    return Promise.reject(new Error('preSignUp:/token'));
+  try {
+    const tokenResponse = await ApiToken.getInstance().getToken(
+      `${user.email}:@liverpool.com`,
+      pass_encript,
+    );
+    console.log('TOKEN response ', tokenResponse);
 
-  const {access_token} = tokenResponse.data;
+    if (tokenResponse === undefined)
+      return Promise.reject(new Error('preSignUp:/token'));
 
-  // We instance main API (https://api.aurumcore.com:9095) and then we pre-register a final user.
-  // Is important set the token before creting instance of Aurum API.
-  HttpClient.bearerToken = access_token;
+    const {access_token} = tokenResponse.data;
+
+    // We instance main API (https://api.aurumcore.com:9095) and then we pre-register a final user.
+    // Is important set the token before creting instance of Aurum API.
+    HttpClient.bearerToken = access_token;
+  } catch (error) {
+    console.log('error token ', error);
+  }
 
   const registerResponse = await ApiAurum.getInstance().postRequest(
     '/onboarding/1.0.0/register/create',
     {
       branchId: 'pMaCKHWPSuCGWmPzNn3DTvma2xR9AyNqX5bX',
       email: user.email,
-      password: cryptoAES(user.password, IDENTIFIER_KEY),
+      password: pass_encript,
       termsAndConditionsId: '61957402ea01ff5337e9af11',
+      personType: '1',
     },
   );
 
@@ -54,14 +64,13 @@ async function login(user: AuthDataInterface): Promise<any> {
   ApiAurum.classInstance = undefined; // Important!
   // We instance TOKEN API (https://token.aurumcore.com) and then we get token
   const tokenResponse = await ApiLogin.getInstance().postRequest('/token', {
-    grant_type: 'password',
+    grant_type: 'client_credentials',
     password: cryptoAES(
       user.password,
-      `${user.email.split('@')[0]}:${IDENTIFIER_KEY_BRANCH}`,
+      `${user.email.split('@')[0]}${IDENTIFIER_KEY_BRANCH}`,
     ),
     username: user.email + IDENTIFIER_BRANCH_DOMAIN,
-    scope:
-      'CTP_cards_role user_profile_role use_payments CTP_account_role update_info_scope use_otp',
+    scope: 'CTP_account_role CTP_cards_role use_accounts user_profile_role',
     longitude: '41',
     latitude: '40',
   });

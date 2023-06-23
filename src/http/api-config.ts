@@ -5,7 +5,7 @@ import {API_ZIP_CODES_URL} from '../config';
 import {HttpClient} from './http-client';
 
 // const API_URL_TOKEN = 'https://0b667aaa-b6d3-4e79-9fa0-50d18eb5603e.mock.pstmn.io';
-// const API_URL_TOKEN = 'https://token.aurumcore.com';
+ //const API_URL_TOKEN = 'https://token.aurumcore.com';
 // const API_URL = 'https://0b667aaa-b6d3-4e79-9fa0-50d18eb5603e.mock.pstmn.io';
 // const API_URL = 'https://api.aurumcore.com:9095';
 // const API_ZIP_CODES_URL = 'https://mexico-zip-codes.p.rapidapi.com';
@@ -14,7 +14,7 @@ import {HttpClient} from './http-client';
 // example ===> mariano_alberto2020:l1v3rp00l
 // export const IDENTIFIER_KEY_BRANCH = 'l1v3rp00l';
 // export const IDENTIFIER_BRANCH_DOMAIN = '@liverpool.com';
-let API_URL_TOKEN =
+ let API_URL_TOKEN =
   'https://aurumcore-auth.cospace.cloud/tenant/liverpool.com/';
 let API_URL = 'https://aurumcore.cospace.cloud:9095/t/liverpool.com/';
 
@@ -35,7 +35,7 @@ export const ApiConfigGrantCredentials: AxiosRequestConfig = {
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
     Authorization:
-      'Basic cGdSU3dwdGxPTTlLWWYwZ3RDVDliQlRZbGx3YTppQkFObFNvWGJNZ090d0dyWU1WNUFwYlNKU0Fh',
+      'Basic bEpiOG5xR09GdkFYd3dMRW00Y2d2Y0E5T3lRYTpXc1ljeUxOazVKRnVidlhNRlBPRTZYR25ySklh',
   },
 };
 
