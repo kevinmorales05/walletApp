@@ -2,7 +2,6 @@ import {AuthDataInterface} from '../reactRedux';
 import cryptoAES from '../utils/cryptoAES';
 import {
   IDENTIFIER_BRANCH_DOMAIN,
-  IDENTIFIER_KEY,
   IDENTIFIER_KEY_BRANCH,
 } from '../config';
 import {ApiToken} from '../http/api-token';
@@ -15,6 +14,7 @@ import {HttpClient} from '../http/http-client';
  * @param user
  * @returns
  */
+let IDENTIFIER_KEY='lJb8nqGOFvAXwwLEm4cgvcA9OyQa'
 async function preSignUp(user: AuthDataInterface): Promise<any> {
   // We instance TOKEN API (https://token.aurumcore.com) and then we get token
   const tokenResponse = await ApiToken.getInstance().getToken();

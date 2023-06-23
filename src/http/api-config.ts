@@ -1,5 +1,7 @@
 import {AxiosRequestConfig} from 'axios';
-import {API_URL, API_URL_TOKEN, API_ZIP_CODES_URL} from '../config';
+// import {API_URL, API_URL_TOKEN, API_ZIP_CODES_URL} from '../config';
+import {API_ZIP_CODES_URL} from '../config';
+
 import {HttpClient} from './http-client';
 
 // const API_URL_TOKEN = 'https://0b667aaa-b6d3-4e79-9fa0-50d18eb5603e.mock.pstmn.io';
@@ -12,6 +14,9 @@ import {HttpClient} from './http-client';
 // example ===> mariano_alberto2020:l1v3rp00l
 // export const IDENTIFIER_KEY_BRANCH = 'l1v3rp00l';
 // export const IDENTIFIER_BRANCH_DOMAIN = '@liverpool.com';
+let API_URL_TOKEN =
+  'https://aurumcore-auth.cospace.cloud/tenant/liverpool.com/';
+let API_URL = 'https://aurumcore.cospace.cloud:9095/t/liverpool.com/';
 
 /**
  * |^^^^^| Config to get Admin's token that allows to pre-register new users.

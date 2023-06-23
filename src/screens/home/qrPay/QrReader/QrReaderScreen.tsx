@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Alert, Image, SafeAreaView, StyleSheet, Vibration} from 'react-native';
 import {Container, Text, Touchable} from '../../../../components';
-// import { Camera, useCameraDevices } from 'react-native-vision-camera';
-//import { BarcodeFormat, useScanBarcodes } from 'vision-camera-code-scanner';
+import {Camera, useCameraDevices} from 'react-native-vision-camera';
+import {BarcodeFormat, useScanBarcodes} from 'vision-camera-code-scanner';
 import Theme from '../../../../theme';
 import {ARROW_LEFT_BLACK_ICON} from '../../../../assets/images';
 import {useNavigation} from '@react-navigation/native';
@@ -19,6 +19,7 @@ const QrReaderScreen: React.FC<Props> = ({onPressQROk}) => {
   const {arrowContainer, arrowStyle} = styles;
   const devices = useCameraDevices();
   const device = devices.back;
+  console.log("device", device);
 
   const [frameProcessor, barcodes] = useScanBarcodes(
     [BarcodeFormat.ALL_FORMATS],
@@ -27,7 +28,7 @@ const QrReaderScreen: React.FC<Props> = ({onPressQROk}) => {
     },
   );
 
-  const [hasPermission, setHasPermission] = useState(false);
+  const [hasPermission, setHasPermission] = useState(true);
   const [cameraActive, setCameraActive] = useState(true);
 
   const read = useRef<boolean>(false);
@@ -64,7 +65,7 @@ const QrReaderScreen: React.FC<Props> = ({onPressQROk}) => {
         ],
       );
     }
-  }, [barcodes]);
+  }, [barcodes, onPressQROk]);
 
   const onPressBack = () => {
     setCameraActive(false);

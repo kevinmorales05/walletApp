@@ -5,7 +5,7 @@ import Sizes from './Sizes';
 const Theme = {
   Colors,
   Fonts,
-  Sizes
+  Sizes,
 };
 
 export default Theme;

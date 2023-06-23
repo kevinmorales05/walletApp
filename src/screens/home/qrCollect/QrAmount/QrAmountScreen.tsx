@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {Image, StyleSheet, TextInput} from 'react-native';
 import {useTranslation} from 'react-i18next';
-import {ARROW_LEFT_BLACK_ICON} from 'assets/images';
+import {ARROW_LEFT_BLACK_ICON} from '../../../../assets/images';
 
 import {
   Container,

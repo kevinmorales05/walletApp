@@ -5,7 +5,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {CodePayment, HomeStackParams} from '../../../../utils';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../../../reactRedux';
-//import { Barcode, BarcodeFormat } from 'vision-camera-code-scanner';
+import {Barcode, BarcodeFormat} from 'vision-camera-code-scanner';
 import QrReaderScreen from './QrReaderScreen';
 
 const QrReaderController: React.FC = () => {

@@ -29,9 +29,9 @@ const HomeStack: React.FC = () => (
       component={SearchAddresseeController}
     />
     <Stack.Screen name="NewAddressee" component={NewAddresseeController} />
-    {/* <Stack.Screen name="QrAmount" component={QrAmountController} />
+    <Stack.Screen name="QrAmount" component={QrAmountController} />
     <Stack.Screen name="QrCode" component={QrCodeController} />
-    <Stack.Screen name="QrReader" component={QrReaderController} /> */}
+    <Stack.Screen name="QrReader" component={QrReaderController} />
     <Stack.Screen name="MakePayment" component={MakePaymentController} />
     <Stack.Screen name="SuccessPayment" component={SuccessPaymentController} />
   </Stack.Navigator>
