@@ -2,7 +2,7 @@ import qs from 'qs';
 import axios, {AxiosError} from 'axios';
 import {store, setErrorAction} from '../reactRedux';
 import {HttpClient} from './http-client';
-import {ApiConfigGrantPassword} from './api-config';
+import {ApiConfigGrantPassword} from './api-configV3';
 import {GeneralApiProblem, getGeneralApiProblem} from './api-errors';
 
 /**

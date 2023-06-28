@@ -2,7 +2,7 @@ import qs from 'qs';
 import axios, {AxiosError} from 'axios';
 import {store, setErrorAction} from '../reactRedux';
 import {HttpClient} from './http-client';
-import {ApiConfigGrantCredentials} from './api-config';
+import {ApiConfigGrantCredentials} from './api-configV3';
 import {GeneralApiProblem, getGeneralApiProblem} from './api-errors';
 
 /**
@@ -80,14 +80,19 @@ export class ApiToken extends HttpClient {
     return this.classInstance;
   }
 
-  public getToken = (userName: string, pwd: string) =>
-    this.instance.post('/token', {
-      grant_type: 'client_credentials',
-      longitude: '41',
-      latitude: '40',
-      username: userName,
-      password: pwd,
-    });
+  public getToken = (userName: string, pwd: any) =>
+    this.instance.post(
+      '/token',
+      qs.stringify({
+        grant_type: 'client_credentials',
+        longitude: '90',
+        latitude: '90',
+        username: `${userName}@liverpool.com`,
+        password: pwd,
+        scope:
+          'use_otp update_info_scope use_accounts use_payments use_profile use_cards',
+      }),
+    );
 
   private handlerError = (err: Error | AxiosError) => {
     if (axios.isAxiosError(err)) {

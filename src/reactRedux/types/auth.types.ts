@@ -60,7 +60,7 @@ export interface AuthDataInterface {
   msisdn?: string;
   name?: string;
   noticePrivacy?: boolean;
-  password?: string;
+  password?: string | undefined;
   rfc?: string;
   secondLastName?: string;
   termsAndConditionsId?: string;

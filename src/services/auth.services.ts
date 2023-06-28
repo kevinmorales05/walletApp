@@ -8,7 +8,7 @@ import {HttpClient} from '../http/http-client';
 
 let IDENTIFIER_KEY_BRANCH = 'WsYcyLNk5JFubvXMFPOE6XGnrJIa';
 let IDENTIFIER_BRANCH_DOMAIN = ':@liverpool.com';
-let SECRET: 'l1v3rp00l';
+let SECRET = 'l1v3rp00l';
 /**
  * Pre Signup
  * @param user
@@ -16,7 +16,8 @@ let SECRET: 'l1v3rp00l';
  */
 let IDENTIFIER_KEY = 'lJb8nqGOFvAXwwLEm4cgvcA9OyQa';
 async function preSignUp(user: AuthDataInterface): Promise<any> {
-  let pass_encript = cryptoAES(user.password, SECRET);
+  let pass_encript = cryptoAES(user.password, SECRET, user.email);
+  //console.log("pwd encrypted ", JSON.stringify(pass_encript));
 
   try {
     const tokenResponse = await ApiToken.getInstance().getToken(
@@ -63,16 +64,15 @@ async function preSignUp(user: AuthDataInterface): Promise<any> {
 async function login(user: AuthDataInterface): Promise<any> {
   ApiAurum.classInstance = undefined; // Important!
   // We instance TOKEN API (https://token.aurumcore.com) and then we get token
+  let pass_encript = cryptoAES(user.password, SECRET, user.email);
   const tokenResponse = await ApiLogin.getInstance().postRequest('/token', {
-    grant_type: 'client_credentials',
-    password: cryptoAES(
-      user.password,
-      `${user.email.split('@')[0]}${IDENTIFIER_KEY_BRANCH}`,
-    ),
-    username: user.email + IDENTIFIER_BRANCH_DOMAIN,
-    scope: 'CTP_account_role CTP_cards_role use_accounts user_profile_role',
-    longitude: '41',
-    latitude: '40',
+    grant_type: 'password',
+    password: pass_encript,
+    username: user.email + ':@liverpool.com',
+    scope:
+      'use_otp update_info_scope use_accounts use_payments use_profile use_cards',
+    longitude: '90',
+    latitude: '90',
   });
 
   if (tokenResponse?.data) {

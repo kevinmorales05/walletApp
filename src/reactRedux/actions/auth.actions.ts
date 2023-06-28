@@ -1,6 +1,7 @@
 import {AuthActionTypes, AuthDataInterface} from '../../reactRedux/types';
 import {authServices} from '../../services';
 import {CallbackType} from '../../utils';
+import {createNewAccount, loginWithAurum} from '../services';
 
 export const setInitialState = (): AuthActionTypes => ({
   type: 'SET_INITIAL_STATE',
@@ -49,9 +50,11 @@ export function preSignUpAction(
 ) {
   return async () => {
     try {
-      const response = await authServices.preSignUp(user);
+      const response = await loginWithAurum(user, 'signup');
+      console.log('finish prelogin');
       callback(true, response);
     } catch (error: any) {
+      console.log('sigup ', error);
       callback(false, error);
     }
   };
@@ -88,7 +91,8 @@ export function loginAction(
 ) {
   return async () => {
     try {
-      const response = await authServices.login(user);
+      //const response = await authServices.login(user);
+      const response = await loginWithAurum(user, 'login');
       callback(true, response);
     } catch (error: any) {
       callback(false, error);

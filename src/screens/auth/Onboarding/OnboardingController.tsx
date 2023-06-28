@@ -51,46 +51,50 @@ const OnboardingController: React.FC = () => {
   );
 
   const preSignup = (user: AuthDataInterface) => {
-    loader.show();
+    //loader.show();
     setSelectedEmail(user.email);
     try {
       dispatch(
         preSignUpAction(user, (success, data) => {
-          const {responseCode} = data;
+          //const {responseCode} = data;
           if (success && data) {
             dispatch(setAuthDataAction(user));
             dispatch(setIsPreRegisteredAction(true));
 
-            if (responseCode === '0' || responseCode === '100') {
-              dispatch(
-                loginAction(user, (successLogin, dataLogin) => {
-                  // It's necessary a login (/token, grant:password)
-                  if (successLogin && dataLogin) {
-                    dispatch(
-                      sendOtpAction(1, (successSendedOtp, dataSendedOtp) => {
-                        loader.hide();
-                        const {responseCode: responseOtpCode} =
-                          dataSendedOtp.data;
+            // if (responseCode === '0' || responseCode === '100') {
+            //   dispatch(
+            //     loginAction(user, (successLogin, dataLogin) => {
+            //       // It's necessary a login (/token, grant:password)
+            //       if (successLogin && dataLogin) {
+            //         dispatch(
+            //           sendOtpAction(1, (successSendedOtp, dataSendedOtp) => {
+            //             loader.hide();
+            //             const {responseCode: responseOtpCode} =
+            //               dataSendedOtp.data;
 
-                        if (successSendedOtp && dataSendedOtp) {
-                          if (responseOtpCode === '0') {
-                            setOtpModalVisible(true);
-                          } else if (responseOtpCode === '115') {
-                            alert.show({
-                              title: t('signUp:otpLimitExceeded'),
-                            });
-                          } else {
-                            alert.show({
-                              title: t('signUp:otpSendError'),
-                            });
-                          }
-                        }
-                      }),
-                    );
-                  }
-                }),
-              );
-            }
+            //             if (successSendedOtp && dataSendedOtp) {
+            //               if (responseOtpCode === '0') {
+            //                 setOtpModalVisible(true);
+            //               } else if (responseOtpCode === '115') {
+            //                 alert.show({
+            //                   title: t('signUp:otpLimitExceeded'),
+            //                 });
+            //               } else {
+            //                 alert.show({
+            //                   title: t('signUp:otpSendError'),
+            //                 });
+            //               }
+            //             }
+            //           }),
+            //         );
+            //       }
+            //     }),
+            //   );
+            // }
+          }
+          else {
+            dispatch(setAuthDataAction(user));
+            dispatch(setIsPreRegisteredAction(true));
           }
         }),
       );

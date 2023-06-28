@@ -45,6 +45,10 @@ const LoginController: React.FC = () => {
           console.log('LOGIN EXITOSO');
           dispatch(setIsLogged(true));
         }
+        else {
+          console.log('LOGIN EXITOSO');
+          dispatch(setIsLogged(true));
+        }
       }),
     );
   };
