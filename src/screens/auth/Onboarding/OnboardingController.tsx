@@ -23,6 +23,7 @@ import {
   setAuthToken,
   preLoginAction,
   createAccountAction,
+  setIsLogged
 } from '../../../reactRedux';
 import {useAlert, useLoading} from '../../../context';
 import {ZipCodeInfoResponse} from '../../../services';
@@ -54,7 +55,6 @@ const OnboardingController: React.FC = () => {
   const [zipCodeInfo, setZipCodeInfo] = useState<ZipCodeInfoResponse>(
     initialZipCodeInfoState,
   );
- 
 
   const preSignup = (user: AuthDataInterface) => {
     loader.show();
@@ -62,6 +62,8 @@ const OnboardingController: React.FC = () => {
     try {
       dispatch(
         preLoginAction(user, (success, data) => {
+          console.log("DATA ", data);
+          console.log("success ", success);
           if (success && data) {
             console.log('PRE LOGIN EXITOSO');
             console.log('KEVIN TOKEN', data.data.access_token);
@@ -71,21 +73,10 @@ const OnboardingController: React.FC = () => {
             dispatch(setAuthToken(data.data.access_token));
 
             console.log('INicia proceso crear usuario');
-            const {responseCode, data} = data;
-            if (responseCode === '200') {
-              dispatch(
-                createAccountAction(user, data.access_token, (success, data) => {
-                  loader.hide();
-                  if (success && data) {
-                    console.log('USER Created Sucesfully!');
-                    console.log('NEW TOKEN', data.data.access_token);
-                    dispatch(setIsLogged(true));
-                    dispatch(setAuthToken(data.data.access_token));
-                  }
-                }),
-              );
-            }
           }
+          loader.hide();
+          dispatch(setIsLogged(true));
+          dispatch(setAuthToken(data.data.access_token));
         }),
       );
     } catch (error) {
