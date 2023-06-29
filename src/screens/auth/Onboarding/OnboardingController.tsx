@@ -24,6 +24,7 @@ import {useAlert, useLoading} from '../../../context';
 import {ZipCodeInfoResponse} from '../../../services';
 import {useTranslation} from 'react-i18next';
 import OnboardingScreen from './OnboardingScreen';
+import { createNewAccount } from '../../../reactRedux/services';
 
 const initialZipCodeInfoState: ZipCodeInfoResponse = {
   zipCode: '',
@@ -54,50 +55,56 @@ const OnboardingController: React.FC = () => {
     //loader.show();
     setSelectedEmail(user.email);
     try {
-      dispatch(
-        preSignUpAction(user, (success, data) => {
-          //const {responseCode} = data;
-          if (success && data) {
-            dispatch(setAuthDataAction(user));
-            dispatch(setIsPreRegisteredAction(true));
+      // dispatch(
+      //   preSignUpAction(user, (success, data) => {
+      //     //const {responseCode} = data;
+      //     if (data) {
+      //       dispatch(setAuthDataAction(user));
+      //       dispatch(setIsPreRegisteredAction(true));
+      //       console.log('prelogin successfull!')
 
-            // if (responseCode === '0' || responseCode === '100') {
-            //   dispatch(
-            //     loginAction(user, (successLogin, dataLogin) => {
-            //       // It's necessary a login (/token, grant:password)
-            //       if (successLogin && dataLogin) {
-            //         dispatch(
-            //           sendOtpAction(1, (successSendedOtp, dataSendedOtp) => {
-            //             loader.hide();
-            //             const {responseCode: responseOtpCode} =
-            //               dataSendedOtp.data;
+      //       // if (responseCode === '0' || responseCode === '100') {
+      //       //   dispatch(
+      //       //     loginAction(user, (successLogin, dataLogin) => {
+      //       //       // It's necessary a login (/token, grant:password)
+      //       //       if (successLogin && dataLogin) {
+      //       //         dispatch(
+      //       //           sendOtpAction(1, (successSendedOtp, dataSendedOtp) => {
+      //       //             loader.hide();
+      //       //             const {responseCode: responseOtpCode} =
+      //       //               dataSendedOtp.data;
 
-            //             if (successSendedOtp && dataSendedOtp) {
-            //               if (responseOtpCode === '0') {
-            //                 setOtpModalVisible(true);
-            //               } else if (responseOtpCode === '115') {
-            //                 alert.show({
-            //                   title: t('signUp:otpLimitExceeded'),
-            //                 });
-            //               } else {
-            //                 alert.show({
-            //                   title: t('signUp:otpSendError'),
-            //                 });
-            //               }
-            //             }
-            //           }),
-            //         );
-            //       }
-            //     }),
-            //   );
-            // }
-          }
-          else {
-            dispatch(setAuthDataAction(user));
-            dispatch(setIsPreRegisteredAction(true));
-          }
-        }),
-      );
+      //       //             if (successSendedOtp && dataSendedOtp) {
+      //       //               if (responseOtpCode === '0') {
+      //       //                 setOtpModalVisible(true);
+      //       //               } else if (responseOtpCode === '115') {
+      //       //                 alert.show({
+      //       //                   title: t('signUp:otpLimitExceeded'),
+      //       //                 });
+      //       //               } else {
+      //       //                 alert.show({
+      //       //                   title: t('signUp:otpSendError'),
+      //       //                 });
+      //       //               }
+      //       //             }
+      //       //           }),
+      //       //         );
+      //       //       }
+      //       //     }),
+      //       //   );
+      //       // }
+      //     }
+      //     else {
+      //       dispatch(setAuthDataAction(user));
+      //       dispatch(setIsPreRegisteredAction(true));
+      //       dispatch(createNewAccount(user))
+      //       console.log('callback is not working!')
+      //     }
+      //   }),
+      // );
+      let response = createNewAccount(user);
+      console.log('this if reponse ', response);
+
     } catch (error) {
       console.error('Unknow Error', error);
     }

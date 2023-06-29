@@ -65,6 +65,7 @@ const setAxiosConfigAuthServices = (
 };
 const buildNewUserStructure = (user: AuthDataInterface) => {
   let pass_encript = cryptoAES(user.password, SECRET, user.email);
+  console.log('pwd ncripted', pass_encript);
 
   let data = JSON.stringify({
     branchId: '88b12c4a-cc6b-457e-9341-e4808ed6ea06',
@@ -81,9 +82,9 @@ export async function loginWithAurum(
 ): Promise<any> {
   axios(setAxiosConfig(user, signupSettings))
     .then(function (response) {
-      //console.log(JSON.stringify(response.data));
+      console.log('desde login', JSON.stringify(response.data));
       HttpClient.bearerToken = response.data.access_token;
-      return response.data;
+      return response;
     })
     .catch(function (error) {
       console.log(error);
@@ -93,12 +94,14 @@ export async function loginWithAurum(
 
 export async function createNewAccount(user: AuthDataInterface): Promise<any> {
   console.log('start sign up!');
+  let token = '';
   axios(setAxiosConfig(user, 'signup'))
     .then(function (response) {
       //console.log(JSON.stringify(response.data));
+      console.log('TOKEN ', response.data.access_token);
       try {
         const tokenResponse = axios(
-          setAxiosConfigAuthServices(user, response.access_token),
+          setAxiosConfigAuthServices(user, response.data.access_token),
         )
           .then(function (response) {
             console.log(JSON.stringify(response.data));
@@ -106,7 +109,7 @@ export async function createNewAccount(user: AuthDataInterface): Promise<any> {
             return response.data;
           })
           .catch(function (error) {
-            console.log(error);
+            console.log('error in signup',error);
             return error;
           });
         console.log('PreLogin', JSON.stringify(tokenResponse));
