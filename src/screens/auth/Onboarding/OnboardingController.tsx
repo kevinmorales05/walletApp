@@ -2,9 +2,10 @@
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {OtpModal, SafeArea} from '../../../components';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import PagerView from 'react-native-pager-view';
 import {useSelector, useDispatch} from 'react-redux';
+
 import {
   AuthDataInterface,
   preSignUpAction,
@@ -19,6 +20,9 @@ import {
   sendOtpAction,
   getZipCodeInfo,
   setInitialState,
+  setAuthToken,
+  preLoginAction,
+  createAccountAction,
 } from '../../../reactRedux';
 import {useAlert, useLoading} from '../../../context';
 import {ZipCodeInfoResponse} from '../../../services';
@@ -33,6 +37,7 @@ const initialZipCodeInfoState: ZipCodeInfoResponse = {
 };
 
 const OnboardingController: React.FC = () => {
+  const [token, setToken] = useState('');
   const {t} = useTranslation();
   const userAuth = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
@@ -49,44 +54,33 @@ const OnboardingController: React.FC = () => {
   const [zipCodeInfo, setZipCodeInfo] = useState<ZipCodeInfoResponse>(
     initialZipCodeInfoState,
   );
+ 
 
   const preSignup = (user: AuthDataInterface) => {
     loader.show();
     setSelectedEmail(user.email);
     try {
       dispatch(
-        preSignUpAction(user, (success, data) => {
-          const {responseCode} = data;
+        preLoginAction(user, (success, data) => {
           if (success && data) {
-            dispatch(setAuthDataAction(user));
-            dispatch(setIsPreRegisteredAction(true));
+            console.log('PRE LOGIN EXITOSO');
+            console.log('KEVIN TOKEN', data.data.access_token);
+            setToken(data.data.access_token);
+            console.log('newTOken ', token);
+            dispatch(setIsLogged(true));
+            dispatch(setAuthToken(data.data.access_token));
 
-            if (responseCode === '0' || responseCode === '100') {
+            console.log('INicia proceso crear usuario');
+            const {responseCode, data} = data;
+            if (responseCode === '200') {
               dispatch(
-                loginAction(user, (successLogin, dataLogin) => {
-                  // It's necessary a login (/token, grant:password)
-                  if (successLogin && dataLogin) {
-                    dispatch(
-                      sendOtpAction(1, (successSendedOtp, dataSendedOtp) => {
-                        loader.hide();
-                        const {responseCode: responseOtpCode} =
-                          dataSendedOtp.data;
-
-                        if (successSendedOtp && dataSendedOtp) {
-                          if (responseOtpCode === '0') {
-                            setOtpModalVisible(true);
-                          } else if (responseOtpCode === '115') {
-                            alert.show({
-                              title: t('signUp:otpLimitExceeded'),
-                            });
-                          } else {
-                            alert.show({
-                              title: t('signUp:otpSendError'),
-                            });
-                          }
-                        }
-                      }),
-                    );
+                createAccountAction(user, data.access_token, (success, data) => {
+                  loader.hide();
+                  if (success && data) {
+                    console.log('USER Created Sucesfully!');
+                    console.log('NEW TOKEN', data.data.access_token);
+                    dispatch(setIsLogged(true));
+                    dispatch(setAuthToken(data.data.access_token));
                   }
                 }),
               );
@@ -97,6 +91,26 @@ const OnboardingController: React.FC = () => {
     } catch (error) {
       console.error('Unknow Error', error);
     }
+    let stop = false;
+    // while (stop) {
+    //   if (token === '' || token === undefined || token === null) {
+    //     console.log('hola', token);
+    //   } else {
+    //     console.log('VERDAD ', token);
+    //     stop = false;
+    //     dispatch(
+    //       createAccountAction(user, token, (success, data) => {
+    //         loader.hide();
+    //         if (success && data) {
+    //           console.log('USER Created Sucesfully!');
+    //           console.log('NEW TOKEN', data.data.access_token);
+    //           dispatch(setIsLogged(true));
+    //           dispatch(setAuthToken(data.data.access_token));
+    //         }
+    //       }),
+    //     );
+    //   }
+    // }
   };
 
   const updateInfo = (user: AuthDataInterface) => {

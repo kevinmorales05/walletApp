@@ -99,7 +99,34 @@ export function loginAction(
     }
   };
 }
-
+export function preLoginAction(
+  user: AuthDataInterface,
+  callback: CallbackType<any>,
+) {
+  return async () => {
+    try {
+      const response = await authServices.preLogin(user);
+      callback(true, response);
+    } catch (error: any) {
+      callback(false, error);
+    }
+  };
+}
+//estoy aqui
+export function createAccountAction(
+  user: AuthDataInterface,
+  authToken: string,
+  callback: CallbackType<any>,
+) {
+  return async () => {
+    try {
+      const response = await authServices.createAccount(user, authToken);
+      callback(true, response);
+    } catch (error: any) {
+      callback(false, error);
+    }
+  };
+}
 export function sendOtpAction(channel: number, callback: CallbackType<any>) {
   return async () => {
     try {
