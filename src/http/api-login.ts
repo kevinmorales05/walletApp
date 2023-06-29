@@ -25,18 +25,18 @@ export class ApiLogin extends HttpClient {
     this.instance.interceptors.request.use(
       (request: any) => {
         const {headers, baseURL, method, url, data} = request;
-        console.log(
-          'INTERCEPTOR - Starting Request ===> \n\n',
-          JSON.stringify(headers, null, 3),
-          '\n',
-          `baseURL: ${baseURL}`,
-          '\n',
-          `url: ${url}`,
-          '\n',
-          `method: ${method}`,
-          '\n',
-          `data: ${JSON.stringify(data, null, 3)}`,
-        );
+        // console.log(
+        //   'INTERCEPTOR - Starting Request ===> \n\n',
+        //   JSON.stringify(headers, null, 3),
+        //   '\n',
+        //   `baseURL: ${baseURL}`,
+        //   '\n',
+        //   `url: ${url}`,
+        //   '\n',
+        //   `method: ${method}`,
+        //   '\n',
+        //   `data: ${JSON.stringify(data, null, 3)}`,
+        // );
 
         if (
           request.data &&
@@ -45,6 +45,7 @@ export class ApiLogin extends HttpClient {
         ) {
           request.data = qs.stringify(request.data); // important! do not remove this line
         }
+        console.log('data request', request.data);
         return request;
       },
       (error: any) =>

@@ -1,5 +1,5 @@
 interface SetInitialState {
-  type: 'SET_INITIAL_STATE',
+  type: 'SET_INITIAL_STATE';
   payload: AuthDataInterface;
 }
 
@@ -11,6 +11,10 @@ interface SetEmail {
 interface SetIsLoggedAction {
   type: 'SET_IS_LOGGED';
   payload: boolean;
+}
+interface SetAuthTokenAction {
+  type: 'SET_TOKEN';
+  payload: string;
 }
 interface SetIsRegisteredAction {
   type: 'SET_IS_PREREGISTERED';
@@ -29,7 +33,7 @@ interface SetUpdateInfoPersonalDataAction {
 
 interface SetUpdateInfoAddressDataAction {
   type: 'SET_UPDATE_INFO_ADDRESS_DATA';
-  payload: AuthDataInterface
+  payload: AuthDataInterface;
 }
 
 export interface AuthDataInterface {
@@ -64,7 +68,15 @@ export interface AuthDataInterface {
   rfc?: string;
   secondLastName?: string;
   termsAndConditionsId?: string;
+  authToken?: string;
 }
 
-export type AuthActionTypes = SetInitialState | SetEmail | SetIsLoggedAction | SetIsRegisteredAction | SetAuthDataAction |
-SetUpdateInfoPersonalDataAction | SetUpdateInfoAddressDataAction;
+export type AuthActionTypes =
+  | SetInitialState
+  | SetEmail
+  | SetIsLoggedAction
+  | SetIsRegisteredAction
+  | SetAuthDataAction
+  | SetUpdateInfoPersonalDataAction
+  | SetUpdateInfoAddressDataAction
+  | SetAuthTokenAction;

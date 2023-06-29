@@ -1,4 +1,4 @@
-import { AuthActionTypes, AuthDataInterface } from '../types';
+import {AuthActionTypes, AuthDataInterface} from '../types';
 
 const initialState: AuthDataInterface = {
   addressCity: '',
@@ -31,12 +31,13 @@ const initialState: AuthDataInterface = {
   password: '',
   rfc: '',
   secondLastName: '',
-  termsAndConditionsId: ''
+  termsAndConditionsId: '',
+  authToken: '',
 };
 
 export default function AuthReducer(
   state: AuthDataInterface = initialState,
-  action: AuthActionTypes
+  action: AuthActionTypes,
 ): AuthDataInterface {
   switch (action.type) {
     case 'SET_INITIAL_STATE':
@@ -45,26 +46,32 @@ export default function AuthReducer(
     case 'SET_EMAIL':
       return {
         ...state,
-        email: action.payload
+        email: action.payload,
       };
 
     case 'SET_IS_LOGGED':
       return {
         ...state,
-        isLogged: action.payload
+        isLogged: action.payload,
+      };
+
+    case 'SET_TOKEN':
+      return {
+        ...state,
+        authToken: action.payload,
       };
 
     case 'SET_PREREGISTERED_AUTH_DATA':
       return {
         ...state,
         email: action.payload.email,
-        password: action.payload.password
+        password: action.payload.password,
       };
 
     case 'SET_IS_PREREGISTERED':
       return {
         ...state,
-        isPreRegistered: action.payload
+        isPreRegistered: action.payload,
       };
 
     case 'SET_UPDATE_INFO_PERSONAL_DATA':
@@ -76,7 +83,7 @@ export default function AuthReducer(
         gender: action.payload.gender,
         mobilePhone: action.payload.mobilePhone,
         curp: action.payload.curp,
-        rfc: action.payload.rfc
+        rfc: action.payload.rfc,
       };
 
     case 'SET_UPDATE_INFO_ADDRESS_DATA':
@@ -102,7 +109,7 @@ export default function AuthReducer(
         middleName: action.payload.middleName,
         msisdn: action.payload.msisdn,
         password: action.payload.password,
-        termsAndConditionsId: action.payload.termsAndConditionsId
+        termsAndConditionsId: action.payload.termsAndConditionsId,
       };
 
     default:

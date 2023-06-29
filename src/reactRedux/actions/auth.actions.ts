@@ -16,6 +16,10 @@ export const setIsLogged = (data: boolean): AuthActionTypes => ({
   type: 'SET_IS_LOGGED',
   payload: data,
 });
+export const setAuthToken = (data: string): AuthActionTypes => ({
+  type: 'SET_TOKEN',
+  payload: data,
+});
 
 export const setIsPreRegisteredAction = (data: boolean): AuthActionTypes => ({
   type: 'SET_IS_PREREGISTERED',

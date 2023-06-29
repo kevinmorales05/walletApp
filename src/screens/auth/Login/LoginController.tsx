@@ -4,7 +4,12 @@ import {useNavigation} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {useSelector, useDispatch} from 'react-redux';
 import {useAlert, useLoading} from '../../../context';
-import {loginAction, RootState, setIsLogged} from '../../../reactRedux';
+import {
+  loginAction,
+  RootState,
+  setAuthToken,
+  setIsLogged,
+} from '../../../reactRedux';
 import LoginScreen from './LoginScreen';
 
 const LoginController: React.FC = () => {
@@ -43,7 +48,9 @@ const LoginController: React.FC = () => {
         loader.hide();
         if (success && data) {
           console.log('LOGIN EXITOSO');
+          console.log('KEVIN TOKEN', data.data.access_token);
           dispatch(setIsLogged(true));
+          dispatch(setAuthToken(data.data.access_token));
         }
       }),
     );

@@ -14,9 +14,9 @@ import {HttpClient} from './http-client';
 // example ===> mariano_alberto2020:l1v3rp00l
 // export const IDENTIFIER_KEY_BRANCH = 'l1v3rp00l';
 // export const IDENTIFIER_BRANCH_DOMAIN = '@liverpool.com';
- let API_URL_TOKEN =
-  'https://aurumcore-auth.cospace.cloud/tenant/liverpool.com/';
-let API_URL = 'https://aurumcore.cospace.cloud:9095/t/liverpool.com/';
+let API_URL_TOKEN = 'https://aurumcore-auth.cospace.cloud/tenant/liverpool.com';
+
+let API_URL = 'https://aurumcore-auth.cospace.cloud';
 
 /**
  * |^^^^^| Config to get Admin's token that allows to pre-register new users.
@@ -83,6 +83,11 @@ export const ApiConfig = (): AxiosRequestConfig => {
  * |  4  |
  * |,,,,,|
  */
+
+
+
+
+
 export const ApiZipCodesConfig: AxiosRequestConfig = {
   baseURL: API_ZIP_CODES_URL,
   headers: {

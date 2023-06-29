@@ -5,10 +5,12 @@ import {ApiToken} from '../http/api-token';
 import {ApiAurum} from '../http/api-aurum';
 import {ApiLogin} from '../http/api-login';
 import {HttpClient} from '../http/http-client';
+import qs from 'qs';
+import axios from 'axios';
 
 let IDENTIFIER_KEY_BRANCH = 'WsYcyLNk5JFubvXMFPOE6XGnrJIa';
 let IDENTIFIER_BRANCH_DOMAIN = ':@liverpool.com';
-let SECRET: 'l1v3rp00l';
+let SECRET = 'l1v3rp00l';
 /**
  * Pre Signup
  * @param user
@@ -61,25 +63,19 @@ async function preSignUp(user: AuthDataInterface): Promise<any> {
  * @param user
  */
 async function login(user: AuthDataInterface): Promise<any> {
-  ApiAurum.classInstance = undefined; // Important!
-  // We instance TOKEN API (https://token.aurumcore.com) and then we get token
-  const tokenResponse = await ApiLogin.getInstance().postRequest('/token', {
-    grant_type: 'client_credentials',
-    password: cryptoAES(
-      user.password,
-      `${user.email.split('@')[0]}${IDENTIFIER_KEY_BRANCH}`,
-    ),
-    username: user.email + IDENTIFIER_BRANCH_DOMAIN,
-    scope: 'CTP_account_role CTP_cards_role use_accounts user_profile_role',
-    longitude: '41',
-    latitude: '40',
-  });
-
-  if (tokenResponse?.data) {
-    const {access_token} = tokenResponse.data;
-    // We only need set the access_token.
-    HttpClient.bearerToken = access_token;
-  }
+  console.log(JSON.stringify(user));
+  const tokenResponse = axios(setAxiosConfig(user, 'login'))
+    .then(function (response) {
+      console.log('desde login', JSON.stringify(response.data));
+      HttpClient.bearerToken = response.data.access_token;
+      console.log('tokk', HttpClient.bearerToken);
+      return response;
+    })
+    .catch(function (error) {
+      console.log(error);
+      return error;
+    });
+  console.log('RESPONSE ', JSON.stringify(tokenResponse, null, 3));
 
   return tokenResponse;
 }
@@ -141,6 +137,49 @@ async function sendOtp(channelId: number): Promise<any> {
 
   return response;
 }
+
+const setAxiosConfig = (user: AuthDataInterface, signupSettings: string) => {
+  const config = {
+    method: 'post',
+    url: 'https://aurumcore-auth.cospace.cloud/tenant/liverpool.com/token',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization:
+        'Basic bEpiOG5xR09GdkFYd3dMRW00Y2d2Y0E5T3lRYTpXc1ljeUxOazVKRnVidlhNRlBPRTZYR25ySklh',
+    },
+    data: buildDataStructure(user, signupSettings),
+  };
+  console.log('Successfully configured axios!');
+  return config;
+};
+
+const buildDataStructure = (
+  user: AuthDataInterface,
+  signupSettings: string,
+) => {
+  let grantTypeConfig = 'client_credentials';
+  if (signupSettings === 'login') {
+    grantTypeConfig = 'password';
+  }
+  if (user.password && user.email) {
+    let pass_encript = cryptoAES(user.password, SECRET, user.email);
+    const userData = qs.stringify({
+      grant_type: `${grantTypeConfig}`,
+      password: `${pass_encript}`,
+      scope:
+        'use_otp update_info_scope use_accounts use_payments use_profile use_cards',
+      username: `${user.email}@liverpool.com`,
+      longitude: '90',
+      latitude: '90',
+    });
+    console.log('datos enviados', userData);
+    console.log('The data structure was created successfully!');
+    return userData;
+  } else {
+    console.log('Incomplete information in order to login!');
+    return null;
+  }
+};
 
 export const authServices = {
   login,
