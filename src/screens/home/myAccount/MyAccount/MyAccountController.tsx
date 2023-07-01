@@ -9,8 +9,13 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {HomeStackParams} from '../../../../utils';
 import {MovementsSheet} from '../../../../components/organisms/MovementsSheet';
 import MyAccountScreen from './MyAccountScreen';
+import {useDispatch, useSelector} from 'react-redux';
+import {getAccountsAction, setAccountAction} from '../../../../reactRedux';
 
 const MyAccountController: React.FC = () => {
+  const {isLogged, authToken} = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+
   const {goBack, navigate} =
     useNavigation<NativeStackNavigationProp<HomeStackParams>>();
   const alert = useAlert();
@@ -36,8 +41,30 @@ const MyAccountController: React.FC = () => {
   };
 
   useEffect(() => {
-    getBalance();
-    getTransactions();
+    // getBalance();
+    // getTransactions();
+  }, []);
+
+  useEffect(() => {
+    dispatch(
+      getAccountsAction(authToken, 'accounts', (success, data) => {
+        if (success && data) dispatch(setAccountAction(data));
+      }),
+    );
+  }, []);
+  useEffect(() => {
+    dispatch(
+      getAccountsAction(authToken, 'transactions', (success, data) => {
+        if (success && data) console.log('Love!');
+      }),
+    );
+  }, []);
+  useEffect(() => {
+    dispatch(
+      getAccountsAction(authToken, 'balances', (success, data) => {
+        if (success && data) console.log('Love!');
+      }),
+    );
   }, []);
 
   useEffect(() => {

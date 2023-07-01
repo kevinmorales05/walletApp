@@ -1,5 +1,8 @@
-import { ApiAurum } from '../http/api-aurum';
-import { AccountInterface } from '../reactRedux';
+import axios from 'axios';
+import {ApiAurum} from '../http/api-aurum';
+import {AccountInterface} from '../reactRedux';
+import cryptoAESauth from '../utils/cryptpAESauth';
+import {cryptoSignature} from '../utils/cryptoSignature';
 
 export type BalanceResponseType = {
   accountId: string;
@@ -9,11 +12,14 @@ export type BalanceResponseType = {
   };
   type: string;
   dateTime: string;
-  creditLine: string
+  creditLine: string;
 };
 
 async function getBalance(): Promise<BalanceResponseType> {
-  const response = await ApiAurum.getInstance().getRequest('/accounts/1.0.0/balances', {});
+  const response = await ApiAurum.getInstance().getRequest(
+    '/accounts/1.0.0/balances',
+    {},
+  );
 
   if (response?.data?.responseMessage === 'Proceso completo y exitoso.') {
     const data = response?.data?.data?.[0];
@@ -22,37 +28,77 @@ async function getBalance(): Promise<BalanceResponseType> {
       accountId: data?.accountId || '',
       amount: {
         amount: data?.amount?.amount || '0.00',
-        currency: data?.amount?.currency || 'MXN'
+        currency: data?.amount?.currency || 'MXN',
       },
       type: data?.type || 'ACCOUNT',
       dateTime: data?.dateTime || '',
-      creditLine: data?.creditLine || ''
+      creditLine: data?.creditLine || '',
     };
   }
 
   throw new Error('Some Wrong');
 }
 
-async function getTransactions(): Promise<any> {
-  const response = await ApiAurum.getInstance().getRequest('/accounts/1.0.0/transactions', {});
+async function getAccounts(
+  token: string,
+  urlToReach: string,
+): Promise<AccountInterface> {
+  // const response = await ApiAurum.getInstance().getRequest(
+  //   '/accounts/1.0.0/accounts',
+  // );
 
-  if (response === undefined) return Promise.reject(new Error('getTransactions:/accounts/1.0.0/transactions'));
-
-  return response;
-}
-
-/**
- * Function to get user accounts.
- */
-async function getAccounts(): Promise<AccountInterface> {
-  const response = await ApiAurum.getInstance().getRequest('/accounts/1.0.0/accounts');
-
-  if (response === undefined) return Promise.reject(new Error('getAccounts:/accounts/1.0.0/accounts'));
+  const response = axios(setAxiosConfigAuthServices(token, urlToReach));
+  if (response === undefined)
+    return Promise.reject(new Error('getAccounts:/accounts/1.0.0/accounts'));
+  console.log('data from accounts ', response);
   return response.data.data[0];
 }
+async function getTransactions(
+  token: string,
+  urlToReach: string,
+): Promise<AccountInterface> {
+  // const response = await ApiAurum.getInstance().getRequest(
+  //   '/accounts/1.0.0/accounts',
+  // );
+
+  const response = axios(setAxiosConfigAuthServices(token, urlToReach));
+  if (response === undefined)
+    return Promise.reject(
+      new Error('getAccounts:/accounts/1.0.0/transactions'),
+    );
+  console.log('data from accounts ', response);
+  return response.data.data[0];
+}
+
+const setAxiosConfigAuthServices = (authToken: string, urlToReach: string) => {
+  let urlService = '';
+  if (urlToReach === 'accounts') {
+    urlService =
+      'https://aurumcore.cospace.cloud:9095/t/liverpool.com/accounts/1.0.0/accounts';
+  } else if (urlToReach === 'transactions') {
+    urlService =
+      'https://aurumcore.cospace.cloud:9095/t/liverpool.com/accounts/1.0.0/transactions';
+  } else if (urlToReach === 'balances') {
+    urlService =
+      'https://aurumcore.cospace.cloud:9095/t/liverpool.com/accounts/1.0.0/balances';
+  }
+
+  console.log('token desde axios accounts ', authToken);
+  const config = {
+    method: 'get',
+    url: urlService,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+      'x-signature': cryptoSignature(authToken, urlService),
+    },
+  };
+  console.log('Successfully configured axios for auth endpoints!');
+  return config;
+};
 
 export const accountServices = {
   getBalance,
   getTransactions,
-  getAccounts
+  getAccounts,
 };

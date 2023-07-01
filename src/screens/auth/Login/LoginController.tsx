@@ -49,8 +49,11 @@ const LoginController: React.FC = () => {
         if (success && data) {
           console.log('LOGIN EXITOSO');
           console.log('KEVIN TOKEN', data.data.access_token);
-          dispatch(setIsLogged(true));
+         
           dispatch(setAuthToken(data.data.access_token));
+          dispatch(setIsLogged(true));
+          
+
         }
       }),
     );

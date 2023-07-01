@@ -19,10 +19,15 @@ export function getBalance(callback: CallbackType<BalanceResponseType>) {
   };
 }
 
-export function getAccountsAction(callback: CallbackType<AccountInterface>) {
+export function getAccountsAction(
+  token: string,
+  urlToReach: string,
+  callback: CallbackType<AccountInterface>,
+  
+) {
   return async () => {
     try {
-      const response = await accountServices.getAccounts();
+      const response = await accountServices.getAccounts(token, urlToReach);
       callback(true, response);
     } catch (error: any) {
       callback(false, error);

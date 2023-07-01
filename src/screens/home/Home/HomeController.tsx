@@ -4,19 +4,34 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {SafeArea} from '../../../components';
 import Theme from '../../../theme';
 import {HomeStackParams} from '../../../utils';
-import {getAccountsAction, setAccountAction} from '../../../reactRedux';
-import {useDispatch} from 'react-redux';
+import {
+  getAccountsAction,
+  setAccountAction,
+  RootState,
+} from '../../../reactRedux';
+import {useDispatch, useSelector} from 'react-redux';
 import HomeScreen from './HomeScreen';
 
 const HomeController: React.FC = () => {
+  const {isLogged, authToken} = useSelector((state: RootState) => state.auth);
+  console.log('Token from redux ', authToken);
+  console.log('iS Logged ', isLogged);
+
   const {dispatch: dispatchDrawer, navigate} =
     useNavigation<NativeStackNavigationProp<HomeStackParams>>();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(
-      getAccountsAction((success, data) => {
+      getAccountsAction(authToken, 'accounts', (success, data) => {
         if (success && data) dispatch(setAccountAction(data));
+      }),
+    );
+  }, []);
+  useEffect(() => {
+    dispatch(
+      getAccountsAction(authToken, 'transactions', (success, data) => {
+        if (success && data) console.log('Love!');
       }),
     );
   }, []);
