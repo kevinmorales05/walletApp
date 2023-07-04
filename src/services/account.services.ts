@@ -14,7 +14,7 @@ export type BalanceResponseType = {
   dateTime: string;
   creditLine: string;
 };
-
+//not using
 async function getBalance(): Promise<BalanceResponseType> {
   const response = await ApiAurum.getInstance().getRequest(
     '/accounts/1.0.0/balances',
@@ -39,19 +39,17 @@ async function getBalance(): Promise<BalanceResponseType> {
   throw new Error('Some Wrong');
 }
 
-async function getAccounts(
-  token: string,
-  urlToReach: string,
-): Promise<AccountInterface> {
-  // const response = await ApiAurum.getInstance().getRequest(
-  //   '/accounts/1.0.0/accounts',
-  // );
-
-  const response = axios(setAxiosConfigAuthServices(token, urlToReach));
-  if (response === undefined)
-    return Promise.reject(new Error('getAccounts:/accounts/1.0.0/accounts'));
-  console.log('data from accounts ', response);
-  return response.data.data[0];
+async function getAccounts(token: string, urlToReach: string): Promise<any> {
+  const response = axios(setAxiosConfigAuthServices(token, urlToReach))
+    .then(function (res) {
+      console.log('Data from accounts ', JSON.stringify(res.data));
+      return res;
+    })
+    .catch(function (error) {
+      console.log('Error ', error);
+      return error;
+    });
+  return response;
 }
 async function getTransactions(
   token: string,

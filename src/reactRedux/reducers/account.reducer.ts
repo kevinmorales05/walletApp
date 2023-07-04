@@ -1,11 +1,13 @@
+import { act } from 'react-test-renderer';
 import {
   AccountActionTypes,
   AccountInterface,
   SET_ACCOUNT,
-  SET_INITIAL_STATE_ACCOUNT
+  SET_INITIAL_STATE_ACCOUNT,
+  AccountsInterface,
 } from '../types';
 
-const initialState: AccountInterface = {
+const initialState2: AccountInterface = {
   accountId: '',
   status: false,
   statusUpdateDateTime: '',
@@ -15,13 +17,22 @@ const initialState: AccountInterface = {
   nickname: '',
   openingDate: '',
   description: '',
-  account: {}
+  account: {},
+};
+const initialState: AccountsInterface = {
+  accountholderId: '',
+  data: [],
+  messageType: 0,
+  responseCode: '',
+  responseMessage: '',
+  responseSubject: '',
+  transId: '',
 };
 
 export default function AccountsReducer(
-  state: AccountInterface = initialState,
-  action: AccountActionTypes
-): AccountInterface {
+  state: AccountsInterface = initialState,
+  action: AccountActionTypes,
+): AccountsInterface {
   switch (action.type) {
     case SET_INITIAL_STATE_ACCOUNT:
       return initialState;
@@ -29,18 +40,16 @@ export default function AccountsReducer(
     case SET_ACCOUNT:
       return {
         ...state,
-        accountId: action.payload.accountId,
-        status: action.payload.status,
-        statusUpdateDateTime: action.payload.statusUpdateDateTime,
-        currency: action.payload.currency,
-        accountType: action.payload.accountType,
-        accountSubType: action.payload.accountSubType,
-        nickname: action.payload.nickname,
-        openingDate: action.payload.openingDate,
-        description: action.payload.description,
-        account: action.payload.account
+        accountholderId: action.payload.accountholderId,
+        data: action.payload.data,
+        messageType: action.payload.messageType,
+        responseCode: action.payload.responseCode,
+        responseMessage: action.payload.responseMessage,
+        responseSubject: action.payload.responseSubject,
+        transId: action.payload.transId,
       };
 
-    default: return state;
+    default:
+      return state;
   }
 }

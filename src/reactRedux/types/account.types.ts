@@ -10,13 +10,13 @@ export type TransactionType = {
 };
 
 interface SetInitialStateAccountAction {
-  type: typeof SET_INITIAL_STATE_ACCOUNT,
-  payload: AccountInterface;
+  type: typeof SET_INITIAL_STATE_ACCOUNT;
+  payload: AccountsInterface;
 }
 
 interface SetAccountAction {
-  type: typeof SET_ACCOUNT,
-  payload: AccountInterface
+  type: typeof SET_ACCOUNT;
+  payload: AccountsInterface;
 }
 
 export interface AccountInterface {
@@ -34,7 +34,18 @@ export interface AccountInterface {
     identification?: string;
     name?: string;
     secondaryIdentification?: string;
-  }
+  };
+}
+export interface AccountsInterface {
+  accountholderId: string;
+  data: any[];
+  messageType: number;
+  responseCode: string;
+  responseMessage: string;
+  responseSubject: string;
+  transId: string;
 }
 
-export type AccountActionTypes = SetInitialStateAccountAction | SetAccountAction;
+export type AccountActionTypes =
+  | SetInitialStateAccountAction
+  | SetAccountAction;

@@ -2,6 +2,7 @@ import {
   AccountInterface,
   SET_ACCOUNT,
   AccountActionTypes,
+  AccountsInterface,
 } from '../../reactRedux/types';
 import {accountServices, BalanceResponseType} from '../../services';
 import {CallbackType} from '../../utils';
@@ -22,8 +23,7 @@ export function getBalance(callback: CallbackType<BalanceResponseType>) {
 export function getAccountsAction(
   token: string,
   urlToReach: string,
-  callback: CallbackType<AccountInterface>,
-  
+  callback: CallbackType<any>,
 ) {
   return async () => {
     try {
@@ -36,7 +36,7 @@ export function getAccountsAction(
 }
 
 export const setAccountAction = (
-  data: AccountInterface,
+  data: AccountsInterface,
 ): AccountActionTypes => ({
   type: SET_ACCOUNT,
   payload: data,

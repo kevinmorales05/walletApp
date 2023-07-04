@@ -6,10 +6,11 @@ import PagerView from 'react-native-pager-view';
 import {NipModal, SafeArea} from '../../../../components';
 import Theme from '../../../../theme';
 import {HomeStackParams} from '../../../../utils';
-import {useDispatch} from 'react-redux';
-import {getBalance, sendMoney} from '../../../../reactRedux';
+import {getAccountsAction, getBalance, sendMoney} from '../../../../reactRedux';
 import {useAlert} from '../../../../context';
 import SendMoneyScreen from './SendMoneyScreen';
+import {useDispatch, useSelector} from 'react-redux';
+
 
 const SendMoneyController: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,8 @@ const SendMoneyController: React.FC = () => {
   const [concept, setConcept] = useState<string>('');
   const [nipModalVisible, setNipModalVisible] = useState<boolean>(false);
   const [balance, setBalance] = useState<string>('0.00');
+  const {isLogged, authToken} = useSelector((state: RootState) => state.auth);
+
 
   const setPage = (index: number) => {
     pagerViewRef.current?.setPage(index);
@@ -34,6 +37,7 @@ const SendMoneyController: React.FC = () => {
   const submit = (nip: string) => {
     setNipModalVisible(false);
     dispatch(
+      ///me quedo aqui debo configurar el flujo de datos
       sendMoney(amount, nip, concept, (success, data) => {
         if (success && data) {
           alert.show({
@@ -53,9 +57,15 @@ const SendMoneyController: React.FC = () => {
   };
 
   useEffect(() => {
+    // dispatch(
+    //   getBalance((success, data) => {
+    //     if (success && data) setBalance(data.amount.amount);
+    //   }),
+    // );
     dispatch(
-      getBalance((success, data) => {
-        if (success && data) setBalance(data.amount.amount);
+      getAccountsAction(authToken, 'balances', (success, data) => {
+        if (success && data) console.log('Love!');
+        console.log("response Balances ", data.accountholderId)
       }),
     );
   }, []);

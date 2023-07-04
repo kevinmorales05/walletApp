@@ -1,15 +1,31 @@
-import { CallbackType } from 'utils';
-import { DomesticPaymentResponseType, transfersServices } from 'services';
+import {CallbackType} from 'utils';
+import {DomesticPaymentResponseType, transfersServices} from '../../services';
 
 export function sendMoney(
   accountId: string,
+  consentID: string,
   amount: string,
   identification: string,
-  callback: CallbackType<DomesticPaymentResponseType>
+  name: string,
+  authToken: string,
+  callback: CallbackType<DomesticPaymentResponseType>,
 ) {
   return async () => {
     try {
-      const response = await transfersServices.sendMoney(accountId, amount, identification);
+      const user = {
+        accountId: accountId,
+        consentID: consentID,
+      };
+      const userToSend = {
+        identification: identification,
+        name: name,
+      };
+      const response = await transfersServices.sendMoney(
+        user,
+        userToSend,
+        authToken,
+        amount,
+      );
 
       callback(true, response);
     } catch (error: any) {

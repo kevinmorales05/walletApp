@@ -24,7 +24,20 @@ const HomeController: React.FC = () => {
   useEffect(() => {
     dispatch(
       getAccountsAction(authToken, 'accounts', (success, data) => {
-        if (success && data) dispatch(setAccountAction(data));
+        // if (success && data) dispatch(setAccountAction(data));
+        // console.log("ACcount ", data.data);
+        console.log('estado cuenta', success);
+        console.log('cuentas ');
+        if (data) {
+          console.log('existen cuentas');
+          console.log(data.data);
+          try {
+            dispatch(setAccountAction(data.data));
+            console.log('save in redux!')
+          } catch (error) {
+            console.log('no esta pasando al estado ', error);
+          }
+        }
       }),
     );
   }, []);

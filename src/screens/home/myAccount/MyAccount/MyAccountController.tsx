@@ -10,11 +10,15 @@ import {HomeStackParams} from '../../../../utils';
 import {MovementsSheet} from '../../../../components/organisms/MovementsSheet';
 import MyAccountScreen from './MyAccountScreen';
 import {useDispatch, useSelector} from 'react-redux';
-import {getAccountsAction, setAccountAction} from '../../../../reactRedux';
+import {RootState, getAccountsAction, setAccountAction} from '../../../../reactRedux';
 
 const MyAccountController: React.FC = () => {
   const {isLogged, authToken} = useSelector((state: RootState) => state.auth);
+  // get account information
+  const account = useSelector((state: RootState) => state.account);
+  console.log("ACCOunt this wallet", account);
   const dispatch = useDispatch();
+
 
   const {goBack, navigate} =
     useNavigation<NativeStackNavigationProp<HomeStackParams>>();
@@ -45,13 +49,13 @@ const MyAccountController: React.FC = () => {
     // getTransactions();
   }, []);
 
-  useEffect(() => {
-    dispatch(
-      getAccountsAction(authToken, 'accounts', (success, data) => {
-        if (success && data) dispatch(setAccountAction(data));
-      }),
-    );
-  }, []);
+  // useEffect(() => {
+  //   dispatch(
+  //     getAccountsAction(authToken, 'accounts', (success, data) => {
+  //       if (success && data) dispatch(setAccountAction(data));
+  //     }),
+  //   );
+  // }, []);
   useEffect(() => {
     dispatch(
       getAccountsAction(authToken, 'transactions', (success, data) => {
