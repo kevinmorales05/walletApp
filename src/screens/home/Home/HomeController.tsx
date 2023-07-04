@@ -14,8 +14,8 @@ import HomeScreen from './HomeScreen';
 
 const HomeController: React.FC = () => {
   const {isLogged, authToken} = useSelector((state: RootState) => state.auth);
-  console.log('Token from redux ', authToken);
-  console.log('iS Logged ', isLogged);
+  //console.log('Token from redux ', authToken);
+  //console.log('iS Logged ', isLogged);
 
   const {dispatch: dispatchDrawer, navigate} =
     useNavigation<NativeStackNavigationProp<HomeStackParams>>();
@@ -45,6 +45,16 @@ const HomeController: React.FC = () => {
     dispatch(
       getAccountsAction(authToken, 'transactions', (success, data) => {
         if (success && data) console.log('Love!');
+      }),
+    );
+  }, []);
+  useEffect(() => {
+    dispatch(
+      getAccountsAction(authToken, 'balances', (success, data) => {
+        console.log('success ', success);
+        console.log('data balances ', data.data);
+        //const accountsArray = suitableBalance(data.data.data);
+        //setBalance(accountsArray[0]);
       }),
     );
   }, []);

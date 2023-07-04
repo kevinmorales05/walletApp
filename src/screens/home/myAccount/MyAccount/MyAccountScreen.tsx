@@ -27,12 +27,12 @@ const ICON_CONTAINER_WIDTH =
 interface Props {
   onPressBack: () => void;
   onPressUnavailableItem: () => void;
-  balance: string;
+  balance: any;
   fetchingBalance: boolean;
 }
 
 interface HeaderComponentProps {
-  balance: string;
+  balance: any;
   onPressUnavailableItem: () => void;
   fetchingBalance: boolean;
 }
@@ -45,6 +45,7 @@ const MyAccountScreen: React.FC<Props> = ({
 }) => {
   const {arrowContainer, arrowStyle} = styles;
   const {t} = useTranslation();
+  console.log('Desde componente balance ', balance);
 
   return (
     <Container flex>
@@ -89,6 +90,24 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
   const {cardStyle, iconContainer, cardGradient} = styles;
   const {t} = useTranslation();
 
+  // const hideAccountNumbers = accountNumber => {
+  //   for (let i = 0; i < accountNumber.length - 3; i++) {
+  //     if (accountNumber[i] === '-') {
+  //       accountNumber[i] = '';
+  //     } else {
+  //       accountNumber[i] = '*';
+  //     }
+  //     console.log('hidden account ', accountNumber);
+  //     return accountNumber;
+  //   }
+  // };
+  let balanceCondition =
+    balance?.amount.amount === undefined ? '0' : balance.amount.amount;
+  let accountNumberCondition =
+    balance?.accountNumber === undefined
+      ? '**** *** *** 456'
+      : balance.accountNumber;
+
   return (
     <Container>
       <TextContainer
@@ -119,7 +138,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
       ) : (
         <>
           <TextContainer
-            text={`$${balance}`}
+            text={`$${balanceCondition}`}
             marginTop={4}
             fontWeight="Bold"
             textAlign="center"
@@ -163,7 +182,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
             </Container>
             <Container row space="between" style={{marginTop: 24}}>
               <Text
-                text="**** **** **** 0790"
+                text={`${accountNumberCondition}`}
                 fontSize={19}
                 textColor={Theme.Colors.Bright}
               />

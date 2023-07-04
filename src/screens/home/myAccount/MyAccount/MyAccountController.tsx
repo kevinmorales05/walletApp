@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useAccount} from '../../../../hooks/use-account';
 import {useAlert} from '../../../../context';
 import {SafeArea} from '../../../../components';
@@ -10,15 +10,28 @@ import {HomeStackParams} from '../../../../utils';
 import {MovementsSheet} from '../../../../components/organisms/MovementsSheet';
 import MyAccountScreen from './MyAccountScreen';
 import {useDispatch, useSelector} from 'react-redux';
-import {RootState, getAccountsAction, setAccountAction} from '../../../../reactRedux';
+import {
+  RootState,
+  getAccountsAction,
+  setAccountAction,
+} from '../../../../reactRedux';
 
 const MyAccountController: React.FC = () => {
   const {isLogged, authToken} = useSelector((state: RootState) => state.auth);
-  // get account information
+  const [balance, setBalance] = useState(); // get account information
   const account = useSelector((state: RootState) => state.account);
-  console.log("ACCOunt this wallet", account);
+  console.log('ACCOunt this wallet', account);
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    dispatch(
+      getAccountsAction(authToken, 'balances', (success, data) => {
+        console.log('success ', success);
+        console.log('data balances ', data.data);
+        const accountsArray = suitableBalance(data.data.data);
+        setBalance(accountsArray[0]);
+      }),
+    );
+  }, []);
 
   const {goBack, navigate} =
     useNavigation<NativeStackNavigationProp<HomeStackParams>>();
@@ -30,7 +43,6 @@ const MyAccountController: React.FC = () => {
     transactions,
     getTransactions,
     getBalance,
-    balance,
     fetchingBalance,
     fetchingTransactions,
   } = useAccount();
@@ -44,38 +56,20 @@ const MyAccountController: React.FC = () => {
     });
   };
 
-  useEffect(() => {
-    // getBalance();
-    // getTransactions();
-  }, []);
+ 
 
-  // useEffect(() => {
-  //   dispatch(
-  //     getAccountsAction(authToken, 'accounts', (success, data) => {
-  //       if (success && data) dispatch(setAccountAction(data));
-  //     }),
-  //   );
-  // }, []);
-  useEffect(() => {
-    dispatch(
-      getAccountsAction(authToken, 'transactions', (success, data) => {
-        if (success && data) console.log('Love!');
-      }),
-    );
-  }, []);
-  useEffect(() => {
-    dispatch(
-      getAccountsAction(authToken, 'balances', (success, data) => {
-        if (success && data) console.log('Love!');
-      }),
-    );
-  }, []);
+  const suitableBalance = array => {
+    let balanceObj = array.filter(element => element.amount.amount > 0);
+    console.log('first', balanceObj);
+    return balanceObj;
+  };
 
   useEffect(() => {
     if (!fetchingTransactions && transactions.length > 0) {
       sheetRef.current?.collapse();
     }
   }, [fetchingTransactions, transactions]);
+  
 
   return (
     <SafeArea barStyle="dark">
