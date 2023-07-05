@@ -5,12 +5,14 @@ import {useNavigation, useRoute, RouteProp} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {HomeStackParams} from '../../../../utils';
-import {useDispatch} from 'react-redux';
-import {sendMoney} from '../../../../reactRedux';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState, sendMoney} from '../../../../reactRedux';
 import MakePaymentScreen from './MakePaymentScreen';
 
 const MakePaymentController: React.FC = () => {
   const {goBack} = useNavigation<NativeStackNavigationProp<HomeStackParams>>();
+  const { authToken} = useSelector((state: RootState) => state.auth);
+
   const alert = useAlert();
   const [nipModalVisible, setNipModalVisible] = useState<boolean>(false);
   const {t} = useTranslation();
@@ -32,9 +34,12 @@ const MakePaymentController: React.FC = () => {
 console.log("pagos datos ", CodePayment);
     dispatch(
       sendMoney(
-        CodePayment.accountId!,
+        CodePayment.accountId,
+        nip,
         CodePayment.amount,
         CodePayment.identification,
+        CodePayment.name,
+        authToken,
         (success, data) => {
           if (success && data) {
             navigate('SuccessPayment', CodePayment);

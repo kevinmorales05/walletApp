@@ -1,4 +1,3 @@
-import {ApiAurum} from '../http/api-aurum';
 import axios from 'axios';
 import {cryptoSignature} from '../utils/cryptoSignature';
 
@@ -101,7 +100,7 @@ async function sendMoney(
   amount: string,
 ): Promise<DomesticPaymentResponseType> {
   const urlToReach =
-    'https://aurumcore.cospace.cloud:9095/t/liverpool.com/payments/1.0.0/domestic-payment';
+    'https://aurumcore.cospace.cloud:9095/t/liverpool.com/payments/1.0.0/domestic-payments';
   const response = axios(
     configTransferService(authToken, urlToReach, userToSend, user, amount),
   );
@@ -127,13 +126,14 @@ async function sendMoney(
 //url to reach is
 // https://aurumcore.cospace.cloud:9095/t/liverpool.com/payments/1.0.0/domestic-payment
 
-let configTransferService = (
+const configTransferService = (
   authToken: string,
   urlToReach: string,
   userToSend: any,
   user: any,
   amount: string,
 ) => {
+  console.log("data to send ", dataSender(userToSend, amount, user));
   let paymentConfig = {
     method: 'post',
     url: urlToReach,
@@ -144,6 +144,7 @@ let configTransferService = (
     },
     data: dataSender(userToSend, amount, user),
   };
+  
   return paymentConfig;
 };
 
@@ -156,8 +157,8 @@ accountID, consentID
 
 */
 
-let dataSender = (userToSend: any, amount: string, user: any) => {
-  JSON.stringify({
+const dataSender = (userToSend: any, amount: string, user: any) => {
+  let bodySender = JSON.stringify({
     accountId: user.accountId,
     consentId: user.consentId,
     initiation: {
@@ -212,7 +213,9 @@ let dataSender = (userToSend: any, amount: string, user: any) => {
       },
     },
   });
+  return bodySender;
 };
+
 export const transfersServices = {
   sendMoney,
 };
