@@ -98,29 +98,33 @@ async function sendMoney(
   userToSend: any,
   authToken: string,
   amount: string,
-): Promise<DomesticPaymentResponseType> {
+): Promise<any> {
   const urlToReach =
     'https://aurumcore.cospace.cloud:9095/t/liverpool.com/payments/1.0.0/domestic-payments';
-  const response = axios(
+  const res = axios(
     configTransferService(authToken, urlToReach, userToSend, user, amount),
-  );
+  ).then(function (response) {
+    console.log('Compra exitosa ', response);
+    return response;
+  });
+  return res;
 
-  if (response?.data?.responseMessage === 'Proceso completo y exitoso.') {
-    const data = response?.data;
+  // if (response?.data?.responseMessage === 'Proceso completo y exitoso.') {
+  //   const data = response?.data;
 
-    return {
-      responseCode: data?.responseCode,
-      responseMessage: data?.responseMessage,
-      responseSubject: data?.responseSubject,
-      messageType: data?.messageType,
-      transId: data?.transId,
-      paymentId: data?.data.paymentId,
-      authorizationCode: data?.data.authorizationCode,
-      accountholderId: data?.accountholderId,
-    };
-  }
+  //   return {
+  //     responseCode: data?.responseCode,
+  //     responseMessage: data?.responseMessage,
+  //     responseSubject: data?.responseSubject,
+  //     messageType: data?.messageType,
+  //     transId: data?.transId,
+  //     paymentId: data?.data.paymentId,
+  //     authorizationCode: data?.data.authorizationCode,
+  //     accountholderId: data?.accountholderId,
+  //   };
+  // }
 
-  throw new Error('Some Wrong');
+  //throw new Error('Some Wrong');
 }
 
 //url to reach is
@@ -133,7 +137,7 @@ const configTransferService = (
   user: any,
   amount: string,
 ) => {
-  console.log("data to send ", dataSender(userToSend, amount, user));
+  console.log('data to send ', dataSender(userToSend, amount, user));
   let paymentConfig = {
     method: 'post',
     url: urlToReach,
@@ -144,7 +148,7 @@ const configTransferService = (
     },
     data: dataSender(userToSend, amount, user),
   };
-  
+
   return paymentConfig;
 };
 
