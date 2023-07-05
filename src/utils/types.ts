@@ -44,4 +44,5 @@ export type CodePayment = {
   accountId?: string;
   amount: string;
   identification: string;
+  name: string;
 };

@@ -90,23 +90,24 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
   const {cardStyle, iconContainer, cardGradient} = styles;
   const {t} = useTranslation();
 
-  // const hideAccountNumbers = accountNumber => {
-  //   for (let i = 0; i < accountNumber.length - 3; i++) {
-  //     if (accountNumber[i] === '-') {
-  //       accountNumber[i] = '';
-  //     } else {
-  //       accountNumber[i] = '*';
-  //     }
-  //     console.log('hidden account ', accountNumber);
-  //     return accountNumber;
-  //   }
-  // };
+  const hideAccountNumbers = accountNumber => {
+    let newArray = accountNumber.split('');
+    for (let i = 0; i < accountNumber.length - 2; i++) {
+      if (accountNumber[i] === '-') {
+        newArray[i] = '     ';
+      } else {
+        newArray[i] = '*';
+      } 
+    }
+    console.log('hidden account yo ', newArray); 
+    return newArray.join("").toString();
+  };
   let balanceCondition =
     balance?.amount.amount === undefined ? '0' : balance.amount.amount;
   let accountNumberCondition =
     balance?.accountNumber === undefined
-      ? '**** *** *** 456'
-      : balance.accountNumber;
+      ? '***   ****   45'
+      : hideAccountNumbers(balance.accountNumber);
 
   return (
     <Container>

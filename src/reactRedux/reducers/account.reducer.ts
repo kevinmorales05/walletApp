@@ -7,18 +7,18 @@ import {
   AccountsInterface,
 } from '../types';
 
-const initialState2: AccountInterface = {
-  accountId: '',
-  status: false,
-  statusUpdateDateTime: '',
-  currency: '',
-  accountType: '',
-  accountSubType: '',
-  nickname: '',
-  openingDate: '',
-  description: '',
-  account: {},
-};
+// const initialState2: AccountInterface = {
+//   accountId: '',
+//   status: false,
+//   statusUpdateDateTime: '',
+//   currency: '',
+//   accountType: '',
+//   accountSubType: '',
+//   nickname: '',
+//   openingDate: '',
+//   description: '',
+//   account: {},
+// };
 const initialState: AccountsInterface = {
   accountholderId: '',
   data: [],

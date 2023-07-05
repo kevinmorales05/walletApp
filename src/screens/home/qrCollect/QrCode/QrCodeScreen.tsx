@@ -42,7 +42,8 @@ const QrCodeScreen: React.FC<Props> = ({amount, onPressBack}) => {
   } = styles;
 
   const userAccount = useSelector((state: RootState) => state.account);
-  const paymentCode = `${amount}|${userAccount.account?.identification}`;
+  console.log('USER ACCOUNT aqui ', userAccount.data[0].accountId);
+  const paymentCode = `${amount}|${userAccount.data[0].account.identification}|${userAccount?.data[0].account.name}`;
   const {t} = useTranslation();
 
   const [codeQR, setCodeQR] = useState<boolean>(true);

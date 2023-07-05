@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {ApiAurum} from '../http/api-aurum';
-import {AccountInterface} from '../reactRedux';
+import {AccountsInterface} from '../reactRedux';
 import cryptoAESauth from '../utils/cryptpAESauth';
 import {cryptoSignature} from '../utils/cryptoSignature';
 
@@ -54,7 +54,7 @@ async function getAccounts(token: string, urlToReach: string): Promise<any> {
 async function getTransactions(
   token: string,
   urlToReach: string,
-): Promise<AccountInterface> {
+): Promise<AccountsInterface> {
   // const response = await ApiAurum.getInstance().getRequest(
   //   '/accounts/1.0.0/accounts',
   // );

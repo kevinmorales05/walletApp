@@ -11,7 +11,8 @@ import QrReaderScreen from './QrReaderScreen';
 const QrReaderController: React.FC = () => {
   const {navigate} =
     useNavigation<NativeStackNavigationProp<HomeStackParams>>();
-  const accountId = useSelector((state: RootState) => state.account.accountId);
+  const userAccount = useSelector((state: RootState) => state.account);
+  const accountId = userAccount.data[0].accountId;
 
   const onSubmit = (code: Barcode) => {
     // Only codes generated from the app are valid
@@ -24,8 +25,9 @@ const QrReaderController: React.FC = () => {
     }
     const amount: any = code.displayValue?.split('|')[0];
     const identification: any = code.displayValue?.split('|')[1];
+    const name: any = code.displayValue?.split('|')[2];
 
-    const payment: CodePayment = {accountId, amount, identification};
+    const payment: CodePayment = {accountId, amount, identification, name};
     navigate('MakePayment', payment);
   };
 

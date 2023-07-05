@@ -1,5 +1,4 @@
 import {
-  AccountInterface,
   SET_ACCOUNT,
   AccountActionTypes,
   AccountsInterface,

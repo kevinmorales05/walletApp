@@ -28,7 +28,8 @@ const MakePaymentController: React.FC = () => {
   };
   const submit = (nip: string) => {
     setNipModalVisible(false);
-
+//aqui esta para enviar el dinero
+console.log("pagos datos ", CodePayment);
     dispatch(
       sendMoney(
         CodePayment.accountId!,
